@@ -10,8 +10,8 @@ def askForFolder():
     root = tk.Tk()
     root.withdraw()
     # url = os.path.abspath(filedialog.askdirectory())
-    # url = "C:/Users/pawelgrz/Desktop/GoogleDrive/PdfCatalogue/WW"
-    url = "C:/GoogleDrive/PdfCatalogue/WW"
+    url = "P:/WW"
+    # url = "C:/GoogleDrive/PdfCatalogue/WW"
 
     if len(url) > 0:
         list = projectDistinguisher.getProjectsList(url)
