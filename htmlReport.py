@@ -36,7 +36,6 @@ def project_div(project):
     name = project["name"]
     url = project["url"]
 
-
     div = div.replace("%name%", name)
     div = div.replace("%url%", url)
 
@@ -54,6 +53,10 @@ def styles():
                 display: inline-block;
                 border: 1px solid;
 			}
+
+
+
+
 
             .url {
                 color: blue;
