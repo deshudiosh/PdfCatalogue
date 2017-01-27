@@ -1,0 +1,8 @@
+('Biurko LAL', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\Biurko LAL\\2015.07.06\\lal18.jpg'])
+('Chocolate', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\Chocolate\\2015.07.07\\choco9.jpg'])
+('Fotel Hexa', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\Fotel Hexa\\2015.07.15\\hexa10.jpg'])
+('Pufa Penta', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\Pufa Penta\\2015.07.06\\penta_v5_level6.jpg'])
+('Sofa Modularna', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\Sofa Modularna\\2015.07.06\\sofa10.jpg'])
+('Sofa ab', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\Sofa ab\\2015.07.06\\ab9.jpg'])
+('mozaika', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\mozaika\\2015.07.13\\mozaika08.jpg'])
+('quadro', ['C:\\GoogleDrive\\PdfCatalogue\\WW\\quadro\\2015.07.13\\quatro07.jpg'])
