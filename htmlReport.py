@@ -54,7 +54,6 @@ def styles():
                 display: inline-block;
                 border: 1px solid;
 			}
-
             .url {
                 color: blue;
                 float: right;
