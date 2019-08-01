@@ -14,7 +14,7 @@ def is_date_string(s:str):
 
 def tree(directory):
     print("finding possible folders: start")
-    possible_projects = (path for path in sorted(directory.rglob('*')) if path.is_dir() and not is_date_string(path.name))
+    possible_projects = (path for path in sorted(directory.glob('*')) if path.is_dir() and not is_date_string(path.name))
     print("finding possible folders: done")
     return possible_projects
 
@@ -32,40 +32,6 @@ def choose_pictures(jpgs)->List[Path]:
     return jpgs
 
 
-def create_project_folders(possible_projects):
-    """search for images and pick few"""
-    for project in possible_projects: # type:Path
-        jpgs = [pic for pic in sorted(project.rglob('*.jpg'))]
-        if len(jpgs) < 1:
-            return
-
-        ## create folder
-        ## TODO: deal with possible name duplicates
-        catalog_path = Path.cwd() / "FolderTree" / "/".join(project.parts[1:])
-        catalog_path.mkdir(parents=True, exist_ok=True)
-
-        ## get pictures to catalogue
-        jpgs = choose_pictures(jpgs)
-
-        ## copy files
-        ## TODO: deal with possible name duplicates
-        links_json = {}
-        copied_jpgs = []
-        for jpg in jpgs:
-            copy_to_path = catalog_path / jpg.name
-            shutil.copy(str(jpg), copy_to_path)
-            copied_jpgs.append(copy_to_path)
-            links_json[jpg.name] = str(jpg)
-
-        ## resize them
-
-
-        ## store links in links_json
-        json_file = catalog_path / "links.json"
-        with open(json_file, 'w') as f:
-            json.dump(links_json, f)
-
-
 def manage_possible_project(project: Path):
     jpgs = [pic for pic in sorted(project.rglob('*.jpg'))]
     if len(jpgs) < 1:
@@ -73,7 +39,8 @@ def manage_possible_project(project: Path):
 
     ## create folder
     ## TODO: deal with possible name duplicates
-    catalog_path = Path.cwd() / "FolderTree" / "/".join(project.parts[1:])
+    disk_letter = project.anchor[0]
+    catalog_path = Path.cwd() / "FolderTree" / disk_letter / "/".join(project.parts[1:])
     catalog_path.mkdir(parents=True, exist_ok=True)
 
     ## get pictures to catalogue
@@ -81,20 +48,25 @@ def manage_possible_project(project: Path):
 
     ## copy files
     ## TODO: deal with possible name duplicates
-    links_json = {}
+    pictures = {}
     copied_jpgs = []
     for jpg in jpgs:
         copy_to_path = catalog_path / jpg.name
         shutil.copy(str(jpg), copy_to_path)
         copied_jpgs.append(copy_to_path)
-        links_json[jpg.name] = str(jpg)
+        pictures[jpg.name] = str(jpg)
 
     ## resize them
 
-    ## store links in links_json
-    json_file = catalog_path / "links.json"
+    ## dump json file
+    json_file = catalog_path / "project.json"
+    json_dict = {
+        "date_creation": project.stat().st_ctime,
+        "date_modification": project.stat().st_mtime,
+        "pictures": pictures
+    }
     with open(json_file, 'w') as f:
-        json.dump(links_json, f)
+        json.dump(json_dict, f)
 
     #finish
     process = multiprocessing.current_process().name
@@ -102,11 +74,9 @@ def manage_possible_project(project: Path):
 
 
 def collect_data():
-    folder = Path(r"P:\WW")
+    # folder = Path(r"P:\WW")
     folder = Path(r"P:\Krzesla")
     possible_projects = tree(folder)
-
-    # create_project_folders(possible_projects)
 
     with multiprocessing.Pool() as pool:
         pool.map(manage_possible_project, possible_projects)
