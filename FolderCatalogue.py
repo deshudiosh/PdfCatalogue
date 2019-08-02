@@ -74,8 +74,8 @@ def manage_possible_project(project: Path):
 
 
 def collect_data():
-    # folder = Path(r"P:\WW")
-    folder = Path(r"P:\Krzesla")
+    folder = Path(r"P:\WW")
+    # folder = Path(r"P:\Krzesla")
     possible_projects = tree(folder)
 
     with multiprocessing.Pool() as pool:
