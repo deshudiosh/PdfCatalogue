@@ -5,6 +5,7 @@ from pathlib import Path
 from string import digits
 from typing import List
 
+
 def is_date_string(s:str):
     just_digits = ''.join(c for c in s if c in digits)
     enough_digits = len(just_digits) >= 6
