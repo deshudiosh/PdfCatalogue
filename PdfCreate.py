@@ -15,7 +15,6 @@ Point = typing.NamedTuple("Point", [('x', int), ('y', int)])
 
 
 def draw_project(c: canvas.Canvas, anchor: Point, project: Path):
-    anchor.y += 10
     c.drawString(anchor.x, anchor.y, project.stem)
 
 
