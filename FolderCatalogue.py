@@ -82,6 +82,8 @@ def collect_data():
     with multiprocessing.Pool() as pool:
         pool.map(manage_possible_project, possible_projects)
 
+    # TODO: sort projects by mod date and dump to file
+
 
 if __name__ == '__main__':
     collect_data()
