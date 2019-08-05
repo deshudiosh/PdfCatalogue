@@ -1,3 +1,5 @@
+import os
+import typing
 from itertools import product
 from pathlib import Path
 from typing import NamedTuple
@@ -6,18 +8,20 @@ from reportlab.lib.pagesizes import landscape, A4
 from reportlab.pdfgen import canvas
 
 
-class Point(NamedTuple):
-    x: int
-    y: int
+# class Point(NamedTuple):
+#     x: int
+#     y: int
+Point = typing.NamedTuple("Point", [('x', int), ('y', int)])
 
 
 def draw_project(c: canvas.Canvas, anchor: Point, project: Path):
-    c.drawString(anchor.x, anchor.y + 10, project.stem)
+    anchor.y += 10
+    c.drawString(anchor.x, anchor.y, project.stem)
 
 
 def init():
     folder = Path.cwd() / "FolderTree/P/WW/"
-    projects = [dir for dir in folder.glob("*") if dir.is_dir()]
+    projects = [p for p in folder.glob("*") if p.is_dir()]
 
     page_size_x, page_size_y = landscape(A4)
     grid = Point(3, 2)
@@ -35,6 +39,7 @@ def init():
 
     c.showPage()
     c.save()
+    os.system("start catalogue.pdf")
 
 
 if __name__ == '__main__':
